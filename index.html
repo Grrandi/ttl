@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<script src="jquery-2.1.3.min.js"></script>
+
+<div class="container">
+    <form name="count">
+        <input type="text" class="form-control input-lg" size="69" name="count2" readonly="readonly">
+    </form>
+</div>
+
+<script>
+    var before="1337!";
+    var current="1337";
+
+    function countdown(date, hours, minutes){
+
+        cd_hours = hours;
+        cd_minutes = minutes;
+        today= new Date();
+        future_date = date;
+
+        var today_year=today.getYear();
+        if (today_year < 1000)
+            today_year+=1900;
+
+        var future_year = future_date.getYear();
+        if (future_year < 1000)
+            future_year+=1900;
+
+        var todaystring=+today.getMonth()+" "+today.getDate()+", "+today_year+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+
+        var futurestring=future_date.getMonth()+" "+future_date.getDate()+", "+future_year+" "+cd_hours+":"+cd_minutes;
+
+        var difference=Date.parse(futurestring)-Date.parse(todaystring);
+        var hours_left=Math.floor((difference%(60*60*1000*24))/(60*60*1000)*1);
+        var minutes_left=Math.floor(((difference%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
+        var seconds_left=Math.floor((((difference%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
+
+        if(hours_left<=0&&minutes_left<=0&&seconds_left<=1){
+            document.forms.count.count2.value="Only "+hours_left+" hours, "+minutes_left+" minutes, and "+seconds_left+" seconds left until "+before
+            setTimeout("countdown(new Date(today.getTime() + 86400000),cd_hours,cd_minutes)",1000);
+
+        }
+        else
+            document.forms.count.count2.value="Only "+hours_left+" hours, "+minutes_left+" minutes, and "+seconds_left+" seconds left until "+before
+            setTimeout('countdown(future_date, cd_hours, cd_minutes)',1000)
+    }
+    countdown(new Date(), 13, 37)
+</script>
+</body>
+</html>
