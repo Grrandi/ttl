@@ -26,11 +26,11 @@
 </div>
 
 <script>
-    mom = moment();
     var mom_now = moment();
     var mom_leet = moment([mom_now.year(), mom_now.month(), mom_now.date(), 13 ,37]);
 
     function ttl() {
+        mom_now = moment();
         if (mom_now < mom_leet) {
             document.getElementById('count').innerHTML = countdown(mom_leet).toString();
         }
